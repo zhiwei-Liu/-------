@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<package name="demo" extends="struts-default">
+<!-- 配置拦截器  -->
+    <interceptors>
+        <interceptor name="inter2" class="com.struts.util.MyInterDemo"></interceptor>
+        
+    </interceptors>
+    <global-results>
+         <result name="error">error.jsp</result>
+    </global-results>
+    <action name="helloaction" class="com.struts.action.LoginAction">
+         <result name="success">index.jsp</result>
+    </action>
+    
+    <action name="managerAction" class="com.struts.action.ManagerAction">
+       <result name="manager">adminmanager.jsp</result>
+       <interceptor-ref name="inter2"></interceptor-ref>
+       <interceptor-ref name="basicStack"></interceptor-ref>
+       </action>
+</package>
+</struts>    

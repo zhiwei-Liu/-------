@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+   <package name="demo" extends="struts-default">
+   <!-- 配置拦截器 -->
+   <interceptors>
+   
+   <interceptor name="inter1" class="com.struts.util.MyDemo"></interceptor>
+   <interceptor name="inter2" class="com.struts.util.MyDemo2"></interceptor>
+   <interceptor name="inter3" class="com.struts.util.MyDemo3"></interceptor>
+   <interceptor name="inter4" class="com.struts.util.MyDemo4"></interceptor>
+   </interceptors>
+   <action name="helloaction" class="com.struts.action.HelloAction">
+      <result name="success">suc.jsp</result>
+      <result name="error">error.jsp</result>
+      <interceptor-ref name="inter1"></interceptor-ref>
+      <interceptor-ref name="inter2">
+      <param name="methodname">execute</param>
+      <param name="actionname">helloaction</param>
+      </interceptor-ref>
+      <interceptor-ref name="basicStack"></interceptor-ref>
+      <interceptor-ref name="inter3"></interceptor-ref>
+      <!-- 对指定的方法进行拦截 -->
+      <interceptor-ref name="inter4">
+      <param name="excludeMethods">execute,input,back,cancel</param>
+      </interceptor-ref>
+   
+   </action>
+   </package>
+
+</struts>    
